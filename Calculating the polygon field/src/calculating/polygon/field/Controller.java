@@ -17,10 +17,19 @@ import java.util.InputMismatchException;
  */
 public class Controller {
     
+    /**
+     * @param arguments
+     * @return
+     */
     public boolean areArguments(String[] arguments){
         return arguments.length > 0;
     }
     
+    /**
+     *
+     * @param view
+     * @return
+     */
     public float[] getArguments(View view){
         float[] vertices;
         Scanner input = new Scanner(System.in);
@@ -50,6 +59,12 @@ public class Controller {
         return vertices;
     }
     
+    /**
+     *
+     * @param arguments
+     * @param view
+     * @return
+     */
     public float[] parseArguments(String[] arguments, View view){
         float[] vertices = new float[arguments.length];
         for(int index = 0; index < arguments.length; index++){
@@ -65,6 +80,10 @@ public class Controller {
         return vertices;
     }
     
+    /**
+     *
+     * @param vertices
+     */
     public void calculatePolygonField(float[] vertices){
         try{
             if(vertices.length < 3){
