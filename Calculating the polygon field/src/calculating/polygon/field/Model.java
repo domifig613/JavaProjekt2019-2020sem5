@@ -15,7 +15,7 @@ import java.util.InputMismatchException;
  * @author Dominik Figlak
  * @version 1.0
  */
-public class Controller {
+public class Model {
     
     /**
      * @param arguments
@@ -30,17 +30,17 @@ public class Controller {
      * @param view
      * @return
      */
-    public float[] getArguments(View view){
-        float[] vertices;
+    public List<Vector2> getArguments(View view){
+        List<Vector2> vertices;
         Scanner input = new Scanner(System.in);
         view.starGetVerticesFromInput();
 
         int count = getIntFromInput(input, view);
-      
-        vertices = new float[count];
         
-        for(int i=0; i<vertices.length; i++){
-            view.toGetFloat();
+        vertices = new ArrayList<Vector2>();
+        
+        for(int i=0; i < count; i++){
+            
             
             if(input.toString().length() == 0)
             {
@@ -48,7 +48,11 @@ public class Controller {
             }
             
             try {
-                vertices[i] = input.nextFloat();
+                view.toGetX();
+                Float vertexX = new Float(input.nextFloat());
+                view.toGetY();
+                Float vertexY = new Float(input.nextFloat());
+                vertices.add(new Vector2(vertexX, vertexY));
             }
             catch (InputMismatchException ime) {
                 view.badNumberInInput();
@@ -65,11 +69,12 @@ public class Controller {
      * @param view
      * @return
      */
-    public float[] parseArguments(String[] arguments, View view){
-        float[] vertices = new float[arguments.length];
+    @Deprecated
+    public List<Float> parseArguments(String[] arguments, View view){
+        List<Float> vertices = new ArrayList<Float>();
         for(int index = 0; index < arguments.length; index++){
             try{
-                vertices[index] = Float.parseFloat(arguments[index].trim());
+                vertices.add(Float.parseFloat(arguments[index].trim()));
             }
             catch (NumberFormatException argument){
                 view.floatParseError(argument);
@@ -84,9 +89,9 @@ public class Controller {
      *
      * @param vertices
      */
-    public void calculatePolygonField(float[] vertices){
+    public void calculatePolygonField(List<Vector2> vertices){
         try{
-            if(vertices.length < 3){
+            if(vertices.size() < 3){
                 throw new NotPolygonException("polygon should has more than 2 vertices");  
             }
         }
@@ -94,6 +99,29 @@ public class Controller {
            System.err.println(ex.getMessage());
            System.exit(0);
        }
+    }
+    
+    public List<Vector2> parseVectorArguments(String[] arguments, View view){
+        List<Vector2> vertices = new ArrayList<Vector2>();
+        if(arguments.length % 2 != 0)
+        {
+            view.messageOddNumbersOfVertices();
+            view.messageBeforeExit();
+            System.exit(0);
+        }
+        for(int index = 0; index < arguments.length; index +=2){
+            try{
+                Float x = Float.parseFloat(arguments[index].trim());
+                Float y = Float.parseFloat(arguments[index+1].trim());
+                vertices.add(new Vector2(x,y));
+            }
+            catch (NumberFormatException argument){
+                view.floatParseError(argument);
+                view.messageBeforeExit();
+                System.exit(0);
+            }
+        }
+        return vertices;
     }
     
     private int getIntFromInput(Scanner input, View view){

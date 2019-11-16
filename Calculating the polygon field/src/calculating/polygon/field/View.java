@@ -5,6 +5,8 @@
  */
 package calculating.polygon.field;
 
+import java.util.List;
+
 /**
  *
  * @author Dominik Figlak
@@ -27,6 +29,10 @@ public class View {
         System.out.println("Aplication will close");
     }
     
+    public void messageOddNumbersOfVertices(){
+        System.out.println("program params must be even values");
+    }
+    
     /**
      *
      */
@@ -44,17 +50,25 @@ public class View {
     /**
      *
      */
+    @Deprecated
     public void toGetFloat(){
         System.out.print("Enter a float: ");
     }
     
+     public void toGetX(){
+        System.out.print("Enter a float x: ");
+    }
+     
+      public void toGetY(){
+        System.out.print("Enter a float y: ");
+    }
     /**
      *
      * @param vertices
      */
-    public void printVertices(float[] vertices){
-          for (int i = 0; i < vertices.length; i++) {
-             System.out.print(vertices[i] + "\n");
+    public void printVertices(List<Vector2> vertices){
+        for (Vector2 vertex : vertices){
+            System.out.print("x: "+ vertex.X() + " y: " + vertex.Y() + "\n");
         }
     }
 }

@@ -1,5 +1,7 @@
 package calculating.polygon.field;
 
+import java.util.List;
+
 /**
  *
  * @author Dominik Figlak
@@ -12,15 +14,15 @@ public class CalculatingThePolygonField {
      * in args specify positions of consecutive vertices of the polygon
      */
     public static void main(String[] args) {
-       Controller controller = new Controller();
+       Model controller = new Model();
        View view = new View();
-       float[] vertices;
+       List<Vector2> vertices;
        
        if(!controller.areArguments(args)){
            vertices = controller.getArguments(view);
        }
        else{
-           vertices = controller.parseArguments(args, view);
+           vertices = controller.parseVectorArguments(args, view);
        }
 
        controller.calculatePolygonField(vertices);
