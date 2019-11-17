@@ -10,7 +10,7 @@ import java.util.List;
 /**
  *
  * @author Dominik Figlak
- * @version 1.0
+ * @version 1.1
  */
 public class View {
 
@@ -59,7 +59,7 @@ public class View {
         System.out.print("Enter a float x: ");
     }
      
-      public void toGetY(){
+    public void toGetY(){
         System.out.print("Enter a float y: ");
     }
     /**

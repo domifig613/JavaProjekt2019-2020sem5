@@ -7,7 +7,8 @@ package calculating.polygon.field;
 
 /**
  *
- * @author domin
+ * @author Dominik Figlak
+ * @version 1.0
  */
 public interface Distance {
     Float calculateDistance(Vector2 firstVertex, Vector2 secoundVertex);

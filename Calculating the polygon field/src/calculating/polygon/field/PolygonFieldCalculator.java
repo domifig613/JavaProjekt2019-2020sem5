@@ -9,7 +9,8 @@ import com.sun.org.glassfish.gmbal.Description;
 
 /**
  *
- * @author domin
+ * @author Dominik Figlak
+ * @version 1.0
  */
 public class PolygonFieldCalculator implements Distance {
     
